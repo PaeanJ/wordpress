@@ -1,3 +1,21 @@
+-- 删除 wp_yooeinoptions 中过期的 transient
+
+DELETE FROM wp_yooeinoptions 
+WHERE option_name LIKE '_transient_%' 
+AND option_name NOT LIKE '_transient_timeout_%';
+
+-- 删除所有 site transient
+DELETE FROM wp_yooeinoptions
+WHERE option_name LIKE '_site_transient_%' 
+AND option_name NOT LIKE '_site_transient_timeout_%';
+
+-- 删除 wp_yooeinoptions 中空或者长度为0的 option_value（可选）
+DELETE FROM wp_yooeinoptions
+WHERE LENGTH(option_value) = 0;
+
+
+
+
 MySQL 特性：
 
 删除数据后空间不自动释放，必须手动 OPTIMIZE TABLE。
