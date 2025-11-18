@@ -1,0 +1,44 @@
+MySQL 特性：
+
+删除数据后空间不自动释放，必须手动 OPTIMIZE TABLE。
+
+所以你必须执行：
+
+OPTIMIZE TABLE wp_yooeinoptions;
+
+
+执行完 1.8GB 会瞬间掉到几十 MB。
+
+🔥 最关键的步骤（你必须完成）
+
+请你按顺序做：
+
+① 删除 transient（临时缓存）
+
+DELETE FROM wp_yooeinoptions
+WHERE option_name LIKE '_transient_%'
+   OR option_name LIKE '_site_transient_%';
+
+② 删除 FileBird 的垃圾快照
+
+DELETE FROM wp_yooeinoptions
+WHERE option_name LIKE 'filebird_backup_%';
+
+③ 删除 Astra/Elementor/WC 缓存（可选但建议）
+
+DELETE FROM wp_yooeinoptions
+WHERE option_name IN (
+    'astra_partials_config_cache',
+    '_astra_sites_old_customizer_data',
+    'elementor_log',
+    '_elementor_notifications_data'
+);
+
+④ 最重要：压缩表（InnoDB 释放空间）
+
+执行：
+
+OPTIMIZE TABLE wp_yooeinoptions;
+
+
+⚠️ 不执行这个，表永远是 1.8GB。
