@@ -1,10 +1,3 @@
-   
-
-
-
-
-   
-
 
 
 
@@ -240,10 +233,22 @@
     margin-right: 2px;
 }
 
+
+
    /* 13 ✅ 隐藏paypal广告信息 */
-.single-product form.cart + div {
+.single-product .message,
+.single-product .message__container,
+.single-product .paypal-messages,
+.single-product .pp-ppc-message,
+.single-product .ppc-message,
+.single-product [data-pp-message],
+.single-product [data-pp-id],
+.single-product button[data-pp-message],
+.single-product button > .message {
     display: none !important;
 }
+
+
 
    /* 14 ✅ 更改库存量位置 */
 .woocommerce-variation-availability {
