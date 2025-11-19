@@ -1,3 +1,9 @@
+   
+
+
+
+
+
    /* 1 ✅ 顶部优惠信息栏 */
 .top-discount-bar {
     width: 100%;
@@ -24,7 +30,7 @@
 
 /* 调整页面内容，避免被固定的页眉遮挡 */
 .site-content {
-    padding-top: 90px;
+    padding-top: 75px;
 }
 
    /* 2 ✅移动端响应式布局 */
@@ -54,28 +60,30 @@
     .ast-main-header-bar-alignment {
         margin-top: 30px;
     }
+  
 
-    .site-content {
-        padding-top: 110px;
-    }
+/* 移动端菜单抽屉宽度 */
+.ast-mobile-header-wrap {
+    width: 200px !important;
+    right: 0 !important;
+    left: auto !important;
+}
 
-    /* 移动端菜单抽屉化 */
-    body .ast-mobile-header-wrap {
-        width: 200px !important;
-        right: 0 !important;
-        left: auto !important;
-    }
+/* 隐藏外层底色，避免干扰圆角 */
+.ast-mobile-popup-drawer {
+    background: transparent !important;
+    box-shadow: none !important;
+}
 
-    .main-header-bar-navigation {
-        box-shadow:
-            -6px 0 12px rgba(0, 0, 0, 0.2),
-            0 6px 12px rgba(0, 0, 0, 0.2);
-        border-radius: 12px 0 0 12px;
-        transform: translateX(0%);
-        transition: transform 0.3s ease;
-        z-index: 9999;
-        overflow-y: auto;
-    }
+/* 真正的菜单白色容器（抽屉效果） */
+.ast-mobile-header-content {
+    background: #fff !important;
+    border-radius: 12px 0 0 12px !important;
+    overflow: hidden !important;
+    box-shadow:
+        -6px 0 12px rgba(0, 0, 0, 0.2),
+        0 6px 12px rgba(0, 0, 0, 0.2) !important;
+}
 
     /* 手机去掉图片购物车图标 */
     .woocommerce ul.products li.product .astra-shop-thumbnail-wrap .add_to_cart_button {
