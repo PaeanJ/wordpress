@@ -3,6 +3,11 @@
 
 
 
+   
+
+
+
+
 
    /* 1 ✅ 顶部优惠信息栏 */
 .top-discount-bar {
@@ -30,7 +35,7 @@
 
 /* 调整页面内容，避免被固定的页眉遮挡 */
 .site-content {
-    padding-top: 75px;
+    padding-top: 100px;
 }
 
    /* 2 ✅移动端响应式布局 */
@@ -60,7 +65,9 @@
     .ast-main-header-bar-alignment {
         margin-top: 30px;
     }
-  
+ .site-content {
+        padding-top: 100px;
+    }
 
 /* 移动端菜单抽屉宽度 */
 .ast-mobile-header-wrap {
@@ -84,6 +91,7 @@
         -6px 0 12px rgba(0, 0, 0, 0.2),
         0 6px 12px rgba(0, 0, 0, 0.2) !important;
 }
+
 
     /* 手机去掉图片购物车图标 */
     .woocommerce ul.products li.product .astra-shop-thumbnail-wrap .add_to_cart_button {
