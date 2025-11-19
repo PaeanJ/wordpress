@@ -236,15 +236,26 @@
 
 
    /* 13 ✅ 隐藏paypal广告信息 */
+.single-product,
+.woocommerce-cart,
+.woocommerce-checkout {
+    --pp-hide: none !important;
+}
+
 .single-product .message,
-.single-product .message__container,
-.single-product .paypal-messages,
-.single-product .pp-ppc-message,
-.single-product .ppc-message,
 .single-product [data-pp-message],
 .single-product [data-pp-id],
-.single-product button[data-pp-message],
-.single-product button > .message {
+.single-product .paypal-messages,
+
+.woocommerce-cart .message,
+.woocommerce-cart [data-pp-message],
+.woocommerce-cart [data-pp-id],
+.woocommerce-cart .paypal-messages,
+
+.woocommerce-checkout .message,
+.woocommerce-checkout [data-pp-message],
+.woocommerce-checkout [data-pp-id],
+.woocommerce-checkout .paypal-messages {
     display: none !important;
 }
 
