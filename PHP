@@ -319,3 +319,13 @@ add_action('wp_footer', function () {
     <?php
     endif;
 });
+
+
+
+
+ /* ✅顶部优惠栏信息 */
+add_action('wp_body_open', function() {
+    echo '<div class="top-discount-bar">
+        Register as a member & Regular settlement every 7 days
+    </div>';
+});
