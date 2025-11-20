@@ -202,6 +202,8 @@
     font-weight: 500;
 }
 
+
+
    /* 12 ✅更改产品价格样式 */
 .woocommerce ul.products li.product .price {
     font-size: 16px;
@@ -209,6 +211,7 @@
     color: #333;
 }
 
+/* 原价样式（del） */
 .woocommerce del .amount {
     color: #000 !important;
     text-decoration: line-through;
@@ -216,21 +219,36 @@
     font-size: 15px;
 }
 
+/* 促销价样式（ins） */
 .woocommerce ins .amount {
     color: #e60023 !important;
     font-size: 18px;
     font-weight: 700;
 }
 
+/* 去除 product 页面 del 的特殊覆盖 */
 .woocommerce div.product .price del,
 .woocommerce div.product span.price del {
     text-decoration: none !important;
 }
 
+/* 货币符号样式 */
 .woocommerce-Price-currencySymbol {
     font-size: 12px;
     vertical-align: super;
     margin-right: 2px;
+}
+
+/* 所有促销产品的促销价（无论是否选择变体） */
+.woocommerce .product.sale .price ins .woocommerce-Price-amount,
+.woocommerce .product.sale .price > .woocommerce-Price-amount {
+    color: #e60023 !important;
+    font-weight: 700 !important;
+}
+
+/* 所有促销产品的原价保持黑色 */
+.woocommerce .product.sale .price del .woocommerce-Price-amount {
+    color: #000 !important;
 }
 
 
@@ -242,20 +260,12 @@
     --pp-hide: none !important;
 }
 
-.single-product .message,
-.single-product [data-pp-message],
 .single-product [data-pp-id],
-.single-product .paypal-messages,
 
-.woocommerce-cart .message,
-.woocommerce-cart [data-pp-message],
 .woocommerce-cart [data-pp-id],
-.woocommerce-cart .paypal-messages,
 
-.woocommerce-checkout .message,
-.woocommerce-checkout [data-pp-message],
 .woocommerce-checkout [data-pp-id],
-.woocommerce-checkout .paypal-messages {
+.woocommerce-checkout .paypal-messages { 
     display: none !important;
 }
 
@@ -270,10 +280,12 @@
     display: none !important;
 }
 
+
+
    /* 15 ✅ 产品卡片设置 */
 .woocommerce ul.products {
     column-count: 2;
-    column-gap: 10px;
+    column-gap: 3px;
     padding: 0;
     margin: 0 auto;
     max-width: 1200px;
@@ -294,7 +306,7 @@
 .woocommerce ul.products li.product {
     display: inline-block;
     width: 100%;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     background-color: #fff;
     border: 1px solid #eee;
     border-radius: 10px;
@@ -308,6 +320,21 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-color: #ccc;
 }
+ 
+  /* 内容图片大小和圆角 */
+.woocommerce ul.products li.product {
+    padding: 5px !important;
+}
+
+.woocommerce ul.products li.product img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
+
 
    /* 16 ✅ 修改购物车页面价格字体 */
 .woocommerce-cart .cart_totals .price,
