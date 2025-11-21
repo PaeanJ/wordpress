@@ -1,0 +1,97 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const header = document.getElementById('masthead');
+  const content = document.querySelector('main') || document.body;
+  if (!header || !content) return;
+
+  
+
+  let isTouching = false;
+  let lastY = 0;
+  let scrollDistanceUp = 0;
+  let isInertiaScrolling = false;
+  let checkInertiaTimer = null;
+
+  let lastScrollTop = window.pageYOffset;
+
+  // 🧠 判断页面是否还在惯性滚动
+  const monitorInertia = () => {
+    if (checkInertiaTimer) clearInterval(checkInertiaTimer);
+    let previous = window.pageYOffset;
+
+    checkInertiaTimer = setInterval(() => {
+      const current = window.pageYOffset;
+      if (Math.abs(current - previous) < 1) {
+        isInertiaScrolling = false;
+        clearInterval(checkInertiaTimer);
+      } else {
+        isInertiaScrolling = true;
+        previous = current;
+      }
+    }, 100);
+  };
+
+  // 👉 手指按下
+  window.addEventListener('touchstart', (e) => {
+    isTouching = true;
+    scrollDistanceUp = 0;
+    lastY = e.touches[0].clientY;
+
+    // ❗不要在这里重置惯性状态，页面可能还在惯性滑动
+    // 只开启检测
+    monitorInertia();
+  }, { passive: true });
+
+  // 👉 手指滑动
+  window.addEventListener('touchmove', (e) => {
+    if (!isTouching) return;
+
+    const currentY = e.touches[0].clientY;
+    const deltaY = currentY - lastY;
+
+    if (deltaY > 0) {
+      // ⬇️ 向下滑动立即隐藏
+      header.classList.add('hide-header');
+      scrollDistanceUp = 0;
+    } else if (deltaY < 0 && !isInertiaScrolling) {
+      // ⬆️ 向上滑动，且页面静止才累积距离
+      scrollDistanceUp += -deltaY;
+    }
+
+    lastY = currentY;
+  }, { passive: true });
+
+  // 👉 手指松开
+  window.addEventListener('touchend', () => {
+    isTouching = false;
+
+    if (window.pageYOffset <= 0) {
+      header.classList.remove('hide-header'); // 顶部强制显示
+    } else if (!isInertiaScrolling && scrollDistanceUp > 50) {
+      header.classList.remove('hide-header'); // 向上滑动松手 且非惯性状态
+    }
+
+    scrollDistanceUp = 0;
+  });
+
+  // 👉 桌面端滚动监听
+  window.addEventListener('scroll', () => {
+    if (isTouching) return;
+
+    const scrollTop = window.pageYOffset;
+    const delta = scrollTop - lastScrollTop;
+
+    monitorInertia(); // 每次滚动都检测惯性
+
+    if (delta > 0) {
+      header.classList.add('hide-header'); // 向下滚动 → 隐藏
+    } else if (delta < 0 && Math.abs(delta) > 30) {
+      header.classList.remove('hide-header'); // 快速向上 → 显示
+    }
+
+    if (scrollTop <= 0) {
+      header.classList.remove('hide-header'); // 顶部强制显示
+    }
+
+    lastScrollTop = scrollTop;
+  });
+});
